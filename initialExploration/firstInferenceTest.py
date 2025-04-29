@@ -1,6 +1,7 @@
-# Last modified: 2025-04-29 09:38:07
-# Version: 0.0.4
+# Last modified: 2025-04-29 11:01:20
+# Version: 0.0.9
 from rfdetr import RFDETRBase
+from rfdetr import RFDETRLarge
 from rfdetr.util.coco_classes import COCO_CLASSES
 import supervision as sv
 import numpy as np
@@ -8,11 +9,12 @@ from PIL import Image
 import os
 
 # Load image
-image_path = "/ai/bennwittRepos/CloverCatcher/media/robot.jpeg"
+image_path = "/ai/bennwittRepos/CloverCatcher/dataPuddle/media/pugs.jpeg"
 image = Image.open(image_path)
 
 # Predict
-model = RFDETRBase()
+model = RFDETRLarge()
+# model = RFDETRBase()
 detections = model.predict(image, threshold=0.5)
 
 # Prepare annotators
