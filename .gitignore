@@ -1,3 +1,22 @@
+<<<<<<< HEAD
+=======
+/.DS_Store
+mediaLibrary/
+ffserver
+ffmpeg
+ffplay
+ffprobe
+*.safetensors
+*.gguf
+zLogs/
+*.wav
+*.mp4
+*.wav
+.venv*
+.gradio*
+rf-detr/
+*.pth
+>>>>>>> ad43f0c (BigBennBranch)
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -5,6 +24,10 @@ __pycache__/
 
 # C extensions
 *.so
+
+# openAi models
+*.pt
+*.pth
 
 # Distribution / packaging
 .Python
@@ -20,12 +43,34 @@ parts/
 sdist/
 var/
 wheels/
+<<<<<<< HEAD
 share/python-wheels/
+=======
+>>>>>>> ad43f0c (BigBennBranch)
 *.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
 
+<<<<<<< HEAD
+=======
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+target/
+
+>>>>>>> ad43f0c (BigBennBranch)
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -36,6 +81,7 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
+<<<<<<< HEAD
 # Unit test / coverage reports
 htmlcov/
 .tox/
@@ -94,12 +140,6 @@ ipython_config.py
 #   install all needed dependencies.
 #Pipfile.lock
 
-# UV
-#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#uv.lock
-
 # poetry
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
@@ -127,6 +167,8 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+=======
+>>>>>>> ad43f0c (BigBennBranch)
 # Environments
 .env
 .venv
@@ -136,16 +178,34 @@ ENV/
 env.bak/
 venv.bak/
 
+<<<<<<< HEAD
 # Spyder project settings
 .spyderproject
 .spyproject
+=======
+# pyenv
+.python-version
+
+# VS Code
+.vscode/
+
+# Python virtual environment
+venv/
+ENV/
+
+# Spyder project settings
+.spyderproject
+>>>>>>> ad43f0c (BigBennBranch)
 
 # Rope project settings
 .ropeproject
 
+<<<<<<< HEAD
 # mkdocs documentation
 /site
 
+=======
+>>>>>>> ad43f0c (BigBennBranch)
 # mypy
 .mypy_cache/
 .dmypy.json
@@ -154,6 +214,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+<<<<<<< HEAD
 # pytype static type analyzer
 .pytype/
 
@@ -166,9 +227,198 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+=======
+# End of https://www.toptal.com/developers/gitignore/api/python
 
-# Ruff stuff:
-.ruff_cache/
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# PyPI configuration file
-.pypirc
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Windows image file caches
+*.stackdump
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Linux
+*~
+
+# Backup files
+*.bak
+*.swp
+*.swo
+*.tmp
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build directories
+build/
+dist/
+tmp/
+*.tmp
+*.temp
+*.swp
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# JavaScript / TypeScript dependencies
+node_modules/
+jspm_packages/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# IDE settings
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# Test coverage
+.coverage
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.coveragerc
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Pipenv
+Pipfile.lock
+
+# Cache
+.cache/
+npm_cache/
+
+# Editor-specific files
+.vscode/
+*.code-workspace
+
+# Windows folders for network shares
+*.directory
+
+# Linux trash folder which might appear on any volume
+.Trash-*
+
+# Microsoft Office temporary files
+~$*
+
+# Specific files for apps and projects
+__pycache__/
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.dSYM/
+*.DS_Store
+*.class
+*.iml
+*.project
+*.sublime-*
+
+# Mac Finder
+*.DS_Store
+
+# IDE and Text Editors files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.tmproj
+*.tmproject
+*.tmproperties
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+.Python
+__pycache__
+.python-version
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Other system files
+.DS_Store
+Thumbs.db
+
+# Java
+target/
+*.jar
+*.war
+*.ear
+*.class
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Lock files
+yarn.lock
+package-lock.json
+Gemfile.lock
+
+# Gradle
+.gradle
+build/
+!gradle-wrapper.jar
+
+# Rust
+target/
+
+# Miscellaneous
+.DS_Store
+Desktop.ini
+
+>>>>>>> ad43f0c (BigBennBranch)
