@@ -1,5 +1,5 @@
-# Last modified: 2025-04-29 16:11:05
-# Version: 0.0.22
+# Last modified: 2025-04-29 17:03:24
+# Version: 0.0.30
 from rfdetr import RFDETRBase
 from rfdetr import RFDETRLarge
 import wandb
@@ -7,13 +7,14 @@ import time
 from pathlib import Path
 
 
-model = RFDETRLarge()
+# model = RFDETRLarge()
+model = RFDETRBase(pretrain_weights="rf-detr-base-2.pth")
 
 datasetLocation = "/ai/bennwittRepos/CloverCatcher/datasets/cloverDataSetcoco"
 trainingArtifacts = "/ai/bennwittRepos/CloverCatcher/dataPuddle/trainingArtifacts"
 device = "cuda"
 projectName = "CloverCatcher"
-runName = "CloverCatcherV3LargeModel"
+runName = "CloverCatcherV4Base2Model"
 
 wandb.login()
 
@@ -36,7 +37,7 @@ model.train(
     project="LuckDetector",
     device=device,
     epochs=25,
-    batch_size=10,
+    batch_size=16,
     grad_accum_steps=1,
     lr=1e-4,
     checkpoint_interval=3,
@@ -45,4 +46,9 @@ model.train(
     gradient_checkpointing=True,
     early_stopping=True,
     early_stopping_patience=5,
+    num_classes=2,
 )
+
+# best for fine tuning
+# "rf-detr-base-2.pth": "https://storage.googleapis.com/rfdetr/rf-detr-base-2.pth",
+# "rf-detr-large.pth": "https://storage.googleapis.com/rfdetr/rf-detr-large.pth"

@@ -1,0 +1,42 @@
+{
+  "os": "Linux-5.15.0-118-generic-x86_64-with-glibc2.35",
+  "python": "CPython 3.11.3",
+  "startedAt": "2025-04-29T21:18:48.851717Z",
+  "program": "/ai/bennwittRepos/CloverCatcher/firstTrain.py",
+  "codePath": "firstTrain.py",
+  "git": {
+    "remote": "git@github.com:bennwitt/CloverCatcher.git",
+    "commit": "698456b66746ba027041928fe20646d508c0da7e"
+  },
+  "email": "benn@6oh8.com",
+  "root": "/ai/bennwittRepos/CloverCatcher/dataPuddle/trainingArtifacts/CloverCatcher_20250429-161848",
+  "host": "tawagoto",
+  "executable": "/ai/bennwittRepos/CloverCatcher/.venvCloverCatcher/bin/python",
+  "codePathLocal": "firstTrain.py",
+  "cpu_count": 4,
+  "cpu_count_logical": 8,
+  "gpu": "NVIDIA RTX A6000",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "950046859264",
+      "used": "292528644096"
+    }
+  },
+  "memory": {
+    "total": "33312681984"
+  },
+  "cpu": {
+    "count": 4,
+    "countLogical": 8
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA RTX A6000",
+      "memoryTotal": "51527024640",
+      "cudaCores": 10752,
+      "architecture": "Ampere"
+    }
+  ],
+  "cudaVersion": "12.4"
+}
