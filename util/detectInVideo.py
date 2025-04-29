@@ -1,29 +1,40 @@
-# Last modified: 2025-04-29 12:28:10
-# Version: 0.0.2
-from rfdetr import RFDETRLarge, RFDETRBase
+# Last modified: 2025-04-29 16:00:30
+# Version: 0.0.33
+from rfdetr import RFDETRBase
 import supervision as sv
 from PIL import Image
 import cv2
+import torch
 
-CLOVER_CLASSES = ["4-leaf Clover", "5-leaf Clover"]
-# model = RFDETRBase.load_from_checkpoint("checkpoints/best_ema.pt", device="cuda")
-model = RFDETRLarge.load_from_checkpoint("checkpoints/best_ema.pt", device="cuda")
+CLOVER_CLASSES = {
+    0: "LuckyClover",
+    1: "4-leaf Clover",
+    2: "5-leaf Clover",
+}
+
+checkpointpath = "/ai/bennwittRepos/CloverCatcher/dataPuddle/trainingArtifacts/CloverCatcher_20250429-113902"
+model = RFDETRBase(
+    pretrained_weights=checkpointpath,
+    device="cuda",
+)
+
 box_annotator = sv.BoxAnnotator()
 label_annotator = sv.LabelAnnotator()
 
 
 def callback(frame, index):
-    rgb_frame = frame[:, :, ::-1]
-    detections = model.predict(rgb_frame, threshold=0.5)
+    rgb_frame = frame[:, :, ::-1].copy()
+    detections = model.predict(rgb_frame, threshold=0.51)
 
     # Labels for detections
     labels = [
-        f"{CLOVER_CLASSES[class_id]} {conf:.2f}"
+        f"{CLOVER_CLASSES.get(class_id, f'Unknown({class_id})')} {conf:.2f}"
         for class_id, conf in zip(detections.class_id, detections.confidence)
     ]
 
-    # Overlay: Check for luck (4-leaf or 5-leaf clover IDs)
-    if any(cls in [0, 1] for cls in detections.class_id):
+    LUCKY_IDS = {1, 2}  # IDs representing 4- and 5-leaf clovers
+
+    if any(int(cls) in LUCKY_IDS for cls in detections.class_id):
         status_text = "🍀 Luck Has Been Detected And Found!"
     else:
         status_text = "🌿 CloverCatcherActive"
@@ -39,10 +50,17 @@ def callback(frame, index):
         status_text,
         (30, 50),
         cv2.FONT_HERSHEY_SIMPLEX,
-        1.0,
+        16.0,
         (0, 255, 0),
-        2,
+        8,
         cv2.LINE_AA,
     )
 
     return annotated
+
+
+sv.process_video(
+    source_path="/ai/bennwittRepos/CloverCatcher/dataPuddle/media/clover.mp4",
+    target_path="/ai/bennwittRepos/CloverCatcher/dataPuddle/media/cloverCatcher-clover.mp4",
+    callback=callback,
+)

@@ -1,5 +1,5 @@
-# Last modified: 2025-04-29 11:57:25
-# Version: 0.0.19
+# Last modified: 2025-04-29 16:11:05
+# Version: 0.0.22
 from rfdetr import RFDETRBase
 from rfdetr import RFDETRLarge
 import wandb
@@ -13,7 +13,7 @@ datasetLocation = "/ai/bennwittRepos/CloverCatcher/datasets/cloverDataSetcoco"
 trainingArtifacts = "/ai/bennwittRepos/CloverCatcher/dataPuddle/trainingArtifacts"
 device = "cuda"
 projectName = "CloverCatcher"
-runName = "CloverCatcherV2LargeModel"
+runName = "CloverCatcherV3LargeModel"
 
 wandb.login()
 
@@ -35,8 +35,8 @@ model.train(
     wandb=True,
     project="LuckDetector",
     device=device,
-    epochs=15,
-    batch_size=8,
+    epochs=25,
+    batch_size=10,
     grad_accum_steps=1,
     lr=1e-4,
     checkpoint_interval=3,
