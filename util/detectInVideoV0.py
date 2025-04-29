@@ -1,18 +1,19 @@
-# Last modified: 2025-04-29 12:18:15
-# Version: 0.0.1
+# Last modified: 2025-04-29 13:07:04
+# Version: 0.0.6
 import supervision as sv
 from rfdetr import RFDETRBase
 from rfdetr.util.coco_classes import COCO_CLASSES
 
-model = RFDETRBase()
+model = RFDETRBase(device="cuda")
+
 
 def callback(frame, index):
-    detections = model.predict(frame[:, :, ::-1], threshold=0.5)
-        
+    rgb_frame = frame[:, :, ::-1].copy()
+    detections = model.predict(rgb_frame, threshold=0.5)
+
     labels = [
         f"{COCO_CLASSES[class_id]} {confidence:.2f}"
-        for class_id, confidence
-        in zip(detections.class_id, detections.confidence)
+        for class_id, confidence in zip(detections.class_id, detections.confidence)
     ]
 
     annotated_frame = frame.copy()
@@ -20,8 +21,9 @@ def callback(frame, index):
     annotated_frame = sv.LabelAnnotator().annotate(annotated_frame, detections, labels)
     return annotated_frame
 
+
 sv.process_video(
-    source_path=<SOURCE_VIDEO_PATH>,
-    target_path=<TARGET_VIDEO_PATH>,
-    callback=callback
+    source_path="/ai/bennwittRepos/CloverCatcher/dataPuddle/media/clover.mp4",
+    target_path="/ai/bennwittRepos/CloverCatcher/dataPuddle/media/annotated-clover.mp4",
+    callback=callback,
 )

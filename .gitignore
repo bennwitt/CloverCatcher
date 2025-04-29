@@ -11,7 +11,9 @@ ffprobe
 zLogs/
 *.wav
 *.mp4
-*.wav
+*.mov
+*.MOV
+*.WAV
 .venv*
 .gradio*
 rf-detr/
