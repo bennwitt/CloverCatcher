@@ -15,6 +15,7 @@ zLogs/
 *.MOV
 *.WAV
 .venv*
+envs/
 .gradio*
 rf-detr/
 *.pth

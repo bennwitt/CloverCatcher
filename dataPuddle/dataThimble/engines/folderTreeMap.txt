@@ -1,0 +1,45 @@
+engines
+┣ audio
+┃  ┣ __init__.py
+┃  ┣ etlAudioVideoContent.py
+┃  ┣ timerFix.py
+┃  ┣ whisperV0.py
+┃  ┣ whisperV10.py
+┃  ┗ whisperV8.py
+┣ auth
+┃  ┣ __init__.py
+┃  ┣ authTokenEngine.py
+┃  ┣ authTokenEnginev1.py
+┃  ┣ emailAuthEngine.py
+┃  ┗ sessionManagerEngine.py
+┣ db
+┃  ┣ __init__.py
+┃  ┗ arangoBaseEngine.py
+┣ feedback
+┃  ┣ __init__.py
+┃  ┗ feedbackEmailEngine.py
+┣ folderTreeMap.txt
+┣ logger
+┃  ┣ __init__.py
+┃  ┗ activityLoggingEngine.py
+┣ msazure
+┃  ┗ __init__.py
+┣ opai
+┃  ┣ __init__.py
+┃  ┣ genQuiz.py
+┃  ┣ genSummary.py
+┃  ┗ getAllModels.py
+┣ profile
+┗ util
+   ┣ __init__.py
+   ┣ markDown2Pdf.py
+   ┣ paths.py
+   ┣ zCipherEngine.py
+   ┣ zCryptEngine.py
+   ┣ zCypherEngine.py
+   ┣ zDataEngine.py
+   ┣ zEnvVarEngine.py
+   ┣ zFileEngine.py
+   ┣ zTextEngine.py
+   ┣ zTimeEngine.py
+   ┗ zWorkLedger.py

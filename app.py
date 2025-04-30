@@ -1,73 +1,25 @@
-# Last modified: 2025-04-29 10:37:58
-# Version: 0.0.19
+# Last modified: 2025-04-29 18:58:48
+# Version: 0.0.46
 import gradio as gr
-from rfdetr import RFDETRBase
-from rfdetr.util.coco_classes import COCO_CLASSES
-import supervision as sv
-from PIL import Image
+from pathlib import Path
+import sys
 import os
+from dataclasses import dataclass, field, asdict
+from typing import List, Dict, Any, Optional, Union
+from models.appDataModel import UserData
+from models.appDataModel import PersonaData
+from engines.agent.agentStudio import agentDirector
 
-# Load model
-model = RFDETRBase()
-color = sv.ColorPalette.from_hex(
-    [
-        "#ffff00",
-        "#ff9b00",
-        "#ff8080",
-        "#ff66b2",
-        "#ff66ff",
-        "#b266ff",
-        "#9999ff",
-        "#3399ff",
-        "#66ffff",
-        "#33ff99",
-        "#66ff66",
-        "#99ff00",
-    ]
-)
+app_root = os.path.abspath(os.path.dirname(__file__))
+if app_root not in sys.path:
+    sys.path.insert(0, os.path.abspath(app_root))
+APP_ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(APP_ROOT / "app"))
 
 
-def agentDirector(message, history):
-    if not message["files"] and not message["text"]:
-        history.append({"role": "user", "content": "Zilch/Nada"})
-        history.append(
-            {
-                "role": "assistant",
-                "content": "Looks like you didn't share any thoughts or files.",
-            }
-        )
-        return history
-
-    image_path = message["files"][0]
-    image = Image.open(image_path)
-
-    detections = model.predict(image, threshold=0.5)
-
-    text_scale = sv.calculate_optimal_text_scale(resolution_wh=image.size)
-    thickness = sv.calculate_optimal_line_thickness(resolution_wh=image.size)
-
-    bbox_annotator = sv.BoxAnnotator(color=color, thickness=thickness)
-    label_annotator = sv.LabelAnnotator(
-        color=color,
-        text_color=sv.Color.BLACK,
-        text_scale=text_scale,
-        smart_position=True,
-    )
-
-    labels = [
-        f"{COCO_CLASSES[class_id]} {confidence:.2f}"
-        for class_id, confidence in zip(detections.class_id, detections.confidence)
-    ]
-
-    annotated_image = image.copy()
-    annotated_image = bbox_annotator.annotate(annotated_image, detections)
-    annotated_image = label_annotator.annotate(annotated_image, detections, labels)
-
-    # Now properly update the history
-    history.append({"role": "user", "content": {"path": image_path}})
-    history.append({"role": "assistant", "content": gr.Image(value=annotated_image)})
-
-    return history
+def init_app_model() -> Dict[str, Any]:
+    """Return a fresh session dict with the two core dataclasses."""
+    return {"seshObj": UserData(), "personaObj": PersonaData()}
 
 
 theme = gr.themes.Base(
@@ -97,6 +49,8 @@ with gr.Blocks(
     fill_width=True,
 ) as cloverCatcher:
 
+    omniObj = gr.State(init_app_model)
+
     cloverCatcherChat = gr.ChatInterface(
         fn=agentDirector,
         autofocus=True,
@@ -106,13 +60,15 @@ with gr.Blocks(
         flagging_dir="./dataPuddle/usrFlags",
         save_history=True,
         multimodal=True,
-        fill_height=True,
+        fill_height=False,
         fill_width=False,
         stop_btn=True,
         show_progress="full",
         type="messages",
         title="🍀 CloverCatcher",
         description="Upload a photo — Get it detected and annotated!",
+        additional_inputs=[omniObj],
+        additional_outputs=[omniObj],
     )
 
 if __name__ == "__main__":
