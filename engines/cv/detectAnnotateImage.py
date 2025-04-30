@@ -1,5 +1,5 @@
-# Last modified: 2025-04-29 22:23:12
-# Version: 0.0.11
+# Last modified: 2025-04-30 09:30:43
+# Version: 0.0.12
 from rfdetr import RFDETRBase, RFDETRLarge
 from rfdetr.util.coco_classes import COCO_CLASSES
 import supervision as sv
@@ -60,4 +60,4 @@ def annotateImageObj(image_path):
     randName = generate_guid8()
     savedImagePath = f"/ai/bennwittRepos/CloverCatcher/app/tmpfiles/{randName}.png"
     annotated_image.save(savedImagePath)
-    return annotated_image
+    return savedImagePath

@@ -1,10 +1,11 @@
-# Last modified: 2025-04-29 22:21:10
-# Version: 0.0.40
+# Last modified: 2025-04-30 10:47:38
+# Version: 0.0.63
 from engines.cv.detectAnnotateImage import annotateImageObj
 import gradio as gr
 
 
 def agentDirector(message, history, omniObj):
+
     user_msg = None
     assistant_msg = None
     if not message["text"]:
@@ -19,11 +20,13 @@ def agentDirector(message, history, omniObj):
     elif message["files"] and message["text"]:
         annotated_image = annotateImageObj(message["files"][0])
         user_msg = {"role": "user", "content": message}
-        assistant_msg = {
-            "role": "assistant",
-            "content": gr.Image(value=annotated_image),
-        }
-
+        assistant_msg = [
+            {
+                "role": "assistant",
+                "content": {"path": annotated_image},
+            },
+            {"role": "assistant", "content": "Got Your Message."},
+        ]
     elif not message["files"] and message["text"]:
         user_msg = {"role": "user", "content": message["text"]}
         assistant_msg = {"role": "assistant", "content": "Got Your Message."}

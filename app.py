@@ -1,5 +1,5 @@
-# Last modified: 2025-04-29 18:58:48
-# Version: 0.0.46
+# Last modified: 2025-04-30 10:07:50
+# Version: 0.0.61
 import gradio as gr
 from pathlib import Path
 import sys
@@ -48,6 +48,15 @@ with gr.Blocks(
     fill_height=True,
     fill_width=True,
 ) as cloverCatcher:
+    mic_input = gr.Audio("microphone", type="filepath", label="🎤 Speak", visible=False)
+    cam_input = gr.Video(
+        "webcam",
+        format="mp4",
+        streaming=True,
+        include_audio=True,
+        label="📸 Snap",
+        visible=False,
+    )
 
     omniObj = gr.State(init_app_model)
 
@@ -64,11 +73,13 @@ with gr.Blocks(
         fill_width=False,
         stop_btn=True,
         show_progress="full",
-        type="messages",
         title="🍀 CloverCatcher",
+        type="messages",
         description="Upload a photo — Get it detected and annotated!",
         additional_inputs=[omniObj],
         additional_outputs=[omniObj],
+        textbox=gr.MultimodalTextbox(file_types=["image", "audio", "video", "text"]),
+        chatbot=gr.Chatbot(type="messages"),
     )
 
 if __name__ == "__main__":
