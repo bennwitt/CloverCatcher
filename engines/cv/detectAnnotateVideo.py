@@ -1,10 +1,9 @@
-# Last modified: 2025-04-29 16:00:30
-# Version: 0.0.33
+# Last modified: 2025-04-29 18:07:44
+# Version: 0.0.34
 from rfdetr import RFDETRBase
 import supervision as sv
 from PIL import Image
 import cv2
-import torch
 
 CLOVER_CLASSES = {
     0: "LuckyClover",

@@ -15,9 +15,12 @@ zLogs/
 *.MOV
 *.WAV
 .venv*
+envs/
+app/tmpfiles/*
 .gradio*
 rf-detr/
 *.pth
+*.pth.1
 >>>>>>> ad43f0c (BigBennBranch)
 # Byte-compiled / optimized / DLL files
 __pycache__/
